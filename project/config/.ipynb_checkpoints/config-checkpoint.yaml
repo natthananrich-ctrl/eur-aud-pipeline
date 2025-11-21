@@ -1,0 +1,49 @@
+# ============================
+# Global Configuration
+# ============================
+
+project:
+  name: "EURAUD Forecast System"
+  version: "1.0.0"
+  author: "Natthanan"
+  created: "2025-11-20"
+
+data:
+  source: "MT5"
+  symbol: "EURAUD"
+  timeframe: "M15"
+  history_bars: 5000
+  save_path: "project/data/raw/"
+
+features:
+  indicators:
+    - RSI
+    - MACD
+    - ATR
+    - BollingerBands
+    - Stochastic
+  fibo_levels:
+    retracements: [0.236, 0.382, 0.5, 0.618, 0.786]
+    extensions: [1.272, 1.618, 2.0]
+  volume:
+    spike_threshold: 1.5
+    divergence_window: 20
+
+model:
+  type: "XGBoost"
+  target: "direction"
+  metrics: ["accuracy", "f1", "rmse"]
+  retrain_threshold:
+    rmse: 0.05
+    drift: 0.1
+
+pipeline:
+  auto_retrain: true
+  audit_logging: true
+  outputs_path: "project/outputs/"
+  logs_path: "project/logs/"
+
+dashboard:
+  enable: true
+  host: "127.0.0.1"
+  port: 5000

@@ -1,0 +1,11 @@
+data:
+  source_path: "project/data/EURAUD_prod.csv"
+  news_path: "project/data/news_prod.csv"
+
+model:
+  save_path: "project/models/prod/"
+  criterion: "f1"
+
+backtest:
+  initial_balance: 50000
+  symbol: "EURAUD"

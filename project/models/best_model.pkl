@@ -1,0 +1,12 @@
+from project.utils.model_versioning import save_model_with_metadata
+import joblib
+
+# โหลดโมเดลที่มีอยู่แล้ว
+model = joblib.load("project/models/best_model.pkl")
+
+# สร้าง metadata เบื้องต้น
+metrics = {"accuracy": None, "f1": None}   # ถ้ายังไม่มีค่า metric จริง
+drift_result = None
+
+# บันทึกเข้า versions/prod เป็นเวอร์ชันแรก
+save_model_with_metadata(model, metrics, drift_result, env="prod", version="baseline")
